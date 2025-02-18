@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Related Diseases</title>
+  <link rel="stylesheet" href="../style.css"> <!-- Use this if CSS is available -->
+</head>
+<body>
+<div class="container">
+  <h2>Related Diseases</h2>
+  <div id="diseaseList" class="disease-container">
+    <p>Loading diseases...</p>
+  </div>
+  <p><a href="../index.html">← Back to Home</a></p>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      fetch("http://localhost:8084/doctor/fetchRelatedDisease")
+          .then(response => response.json())
+          .then(data => {
+              const diseaseList = document.getElementById("diseaseList");
+              diseaseList.innerHTML = ""; // Clear default message
+
+              if (Object.keys(data).length === 0) {
+                  diseaseList.innerHTML = "<p>No related diseases found.</p>";
+                  return;
+              }
+
+              for (const [specialization, diseases] of Object.entries(data)) {
+                  const section = document.createElement("div");
+                  section.classList.add("disease-card"); // Optional, for styling
+
+                  section.innerHTML = `
+                      <h3>${specialization}</h3>
+                      <ul>${diseases.map(disease => `<li>${disease}</li>`).join("")}</ul>
+                  `;
+                  diseaseList.appendChild(section);
+              }
+          })
+          .catch(error => {
+              console.error("Error fetching diseases:", error);
+              document.getElementById("diseaseList").innerHTML = "<p>Failed to load diseases. Please try again.</p>";
+          });
+  });
+</script>
+</body>
+</html>

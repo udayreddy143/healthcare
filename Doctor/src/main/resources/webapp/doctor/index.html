@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Registration</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h2>Doctor Registration</h2>
+    <form id="doctorForm">
+        <input type="text" id="doctorName" placeholder="Enter Doctor's Name" required>
+        <select id="specialization" required>
+            <option value="">Select Specialization</option>
+            <option value="CARDIOLOGIST">Cardiologist</option>
+            <option value="NEUROLOGIST">Neurologist</option>
+            <option value="ORTHOPEDIC">Orthopedic</option>
+            <option value="GYNAECOLOGIST">Gynaecologist</option>
+        </select>
+        <input type="number" id="experience" placeholder="Enter Experience (Years)" required min="0">
+        <button type="submit">Register Doctor</button>
+    </form>
+    <p id="message"></p>
+    <p><a href="../index.html">← Back to Home</a></p>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
