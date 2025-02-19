@@ -33,6 +33,7 @@ public class AdminController {
     public ResponseEntity<?> login(@RequestParam String email, @RequestParam String password) {
         AdminResponse response = adminService.loginAdminAndDoc(email, password);
         if (response != null) {
+            System.out.println("Login successful");
             return ResponseEntity.ok(response); // Login Successful
         }
         return ResponseEntity.badRequest().body("Login unsuccessful. Please register.");
