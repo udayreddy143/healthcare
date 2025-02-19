@@ -7,4 +7,5 @@ public interface AdminService {
     AdminResponse registerAdmin (AdminRequest adminRequest);
 //    void loginAdminByPhoneNumber(Long phoneNumber);
     AdminResponse getProfileById(Long id);
+    AdminResponse loginAdminAndDoc(String email, String password);
 }

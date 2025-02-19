@@ -54,4 +54,19 @@ public class AdminServiceImpl implements AdminService {
         else
             return null;
     }
+
+    @Override
+    public AdminResponse loginAdminAndDoc(String email, String password) {
+        AdminResponse adminResponse = new AdminResponse();
+        Optional<AdminEntity> adminEntity = adminRepository.findByEmailAndPassword(email, password);
+        if (adminEntity.isPresent()) {
+            adminResponse.setName(adminEntity.get().getName());
+            adminResponse.setEmail(adminEntity.get().getEmail());
+            adminResponse.setPassword(adminEntity.get().getPassword());
+            adminResponse.setPhoneNumber(adminEntity.get().getPhoneNumber());
+            adminResponse.setType(adminEntity.get().getType());
+            return adminResponse;
+        }
+        return null;
+    }
 }

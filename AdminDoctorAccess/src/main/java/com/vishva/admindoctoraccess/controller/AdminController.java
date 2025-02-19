@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class AdminController {
@@ -28,7 +25,17 @@ public class AdminController {
 
     @GetMapping("/getProfile/{id}")
     public AdminResponse getProfile(@PathVariable Long id){
+
         return adminService.getProfileById(id);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestParam String email, @RequestParam String password) {
+        AdminResponse response = adminService.loginAdminAndDoc(email, password);
+        if (response != null) {
+            return ResponseEntity.ok(response); // Login Successful
+        }
+        return ResponseEntity.badRequest().body("Login unsuccessful. Please register.");
     }
 
 }
