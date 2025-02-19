@@ -45,13 +45,13 @@ public class AdminServiceImpl implements AdminService {
         Optional<AdminEntity> adminEntity = adminRepository.findById(id);
         if (adminEntity.isPresent()) {
             adminResponse.setName(adminEntity.get().getName());
+            adminResponse.setId(adminEntity.get().getId());
             adminResponse.setEmail(adminEntity.get().getEmail());
             adminResponse.setPassword(adminEntity.get().getPassword());
             adminResponse.setPhoneNumber(adminEntity.get().getPhoneNumber());
             adminResponse.setType(adminEntity.get().getType());
             return adminResponse;
         }
-        else
             return null;
     }
 
@@ -61,6 +61,7 @@ public class AdminServiceImpl implements AdminService {
         Optional<AdminEntity> adminEntity = adminRepository.findByEmailAndPassword(email, password);
         if (adminEntity.isPresent()) {
             adminResponse.setName(adminEntity.get().getName());
+            adminResponse.setId(adminEntity.get().getId());
             adminResponse.setEmail(adminEntity.get().getEmail());
             adminResponse.setPassword(adminEntity.get().getPassword());
             adminResponse.setPhoneNumber(adminEntity.get().getPhoneNumber());

@@ -24,9 +24,13 @@ public class AdminController {
     }
 
     @GetMapping("/getProfile/{id}")
-    public AdminResponse getProfile(@PathVariable Long id){
+    public ResponseEntity<?>  getProfile(@PathVariable Long id){
+    AdminResponse adminResponse= adminService.getProfileById(id);
+        if(adminResponse!=null){
+            return ResponseEntity.ok(adminResponse);
 
-        return adminService.getProfileById(id);
+        }
+        return ResponseEntity.badRequest().body("No profile found.");
     }
 
     @PostMapping("/login")
