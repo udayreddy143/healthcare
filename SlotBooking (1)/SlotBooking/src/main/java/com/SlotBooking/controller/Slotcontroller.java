@@ -1,6 +1,7 @@
 package com.SlotBooking.controller;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import com.SlotBooking.model.DoctorPatientResponse;
 import com.SlotBooking.model.SlotResponse;
@@ -49,7 +50,7 @@ private Slotservice slotservice;
 
 
 	@GetMapping("/getDoctorPatientDetails")
-	public List<DoctorPatientResponse> getDoctorPatientDetails() {
+	public List<DoctorPatientResponse> getDoctorPatientDetails() throws ExecutionException, InterruptedException {
 		return slotservice.getDoctorPatientDetails();
 	}
 
