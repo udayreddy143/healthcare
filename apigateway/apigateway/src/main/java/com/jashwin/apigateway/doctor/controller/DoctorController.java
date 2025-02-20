@@ -21,9 +21,9 @@ public class DoctorController {
     }
 
     @PostMapping("/storedetails")
-    public DoctorResponse storedoctordetails(@RequestBody DoctorRequest doctorRequest) {
+    public DoctorResponse storeDoctorDetails(@RequestBody DoctorRequest doctorRequest) {
 
-        return doctorService.storedoctordetails(doctorRequest);
+        return doctorService.storeDoctorDetails(doctorRequest);
 
     }
 
@@ -42,16 +42,16 @@ public class DoctorController {
     }
 
     @GetMapping("/getDoctordetails")
-    public List<DoctorResponse> getDoctordetails() {
+    public List<DoctorResponse> getDoctorDetails() {
 
-        return doctorService.getDoctordetails();
+        return doctorService.getDoctorDetails();
 
     }
 
     @GetMapping("/getDoctordetailsById/{doctorId}")
-    public DoctorResponse getDoctordetailsById(@PathVariable Integer doctorId) {
+    public DoctorResponse getDoctorDetailsById(@PathVariable Integer doctorId) {
 
-        return doctorService.getDoctordetailsById(doctorId);
+        return doctorService.getDoctorDetailsById(doctorId);
 
     }
 }

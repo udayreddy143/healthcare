@@ -11,13 +11,13 @@ import java.util.Set;
 
 public interface DoctorService {
 
-    DoctorResponse storedoctordetails(DoctorRequest request);
+    DoctorResponse storeDoctorDetails(DoctorRequest request);
 
     DoctorResponse storeRelatedDisease(String spec, Set<String> dis);
 
     Map<String, List<String>> getRelatedDisease();
 
-    List<DoctorResponse> getDoctordetails();
+    List<DoctorResponse> getDoctorDetails();
 
-    DoctorResponse getDoctordetailsById(Integer doctorId);
+    DoctorResponse getDoctorDetailsById(Integer doctorId);
 }
