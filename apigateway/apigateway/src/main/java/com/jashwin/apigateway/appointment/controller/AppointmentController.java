@@ -1,7 +1,7 @@
 package com.jashwin.apigateway.appointment.controller;
 
 
-import com.SlotBooking.model.AppointmentDTO;
+import com.jashwin.apigateway.appointment.dto.AppointmentDTO;
 import com.jashwin.apigateway.appointment.enums.AppointmentStatus;
 import com.jashwin.apigateway.appointment.model.AppointmentRequest;
 import com.jashwin.apigateway.appointment.service.AppointmentService;

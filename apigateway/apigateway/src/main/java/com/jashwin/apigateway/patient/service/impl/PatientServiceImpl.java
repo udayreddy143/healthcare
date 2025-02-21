@@ -7,10 +7,12 @@ import com.jashwin.apigateway.patient.dto.PatientResponse;
 
 import com.jashwin.apigateway.patient.feign.PatientFeign;
 import com.jashwin.apigateway.patient.service.PatientService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-
+@Service
 public class PatientServiceImpl implements PatientService {
-
+    @Autowired
     private PatientFeign patientFeign;
 
 

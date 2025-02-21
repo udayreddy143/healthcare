@@ -6,15 +6,19 @@ import com.jashwin.apigateway.doctor.model.DoctorRequest;
 import com.jashwin.apigateway.doctor.model.DoctorResponse;
 import com.jashwin.apigateway.doctor.service.DoctorService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+
+@Service
 //@Slf4j
 @RequiredArgsConstructor
 public class DoctorServiceImpl implements DoctorService {
-
+    @Autowired
     private DoctorFeign doctorFeign;
 
 

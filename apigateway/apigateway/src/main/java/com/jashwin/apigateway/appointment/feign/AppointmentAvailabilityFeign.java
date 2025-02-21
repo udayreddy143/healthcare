@@ -1,10 +1,10 @@
 package com.jashwin.apigateway.appointment.feign;
 
-import com.SlotBooking.model.AppointmentDTO;
+
+import com.jashwin.apigateway.appointment.dto.AppointmentDTO;
 import com.jashwin.apigateway.appointment.enums.AppointmentStatus;
 import com.jashwin.apigateway.appointment.model.AppointmentRequest;
-import com.jashwin.apigateway.patient.dto.PatientRequest;
-import com.jashwin.apigateway.patient.dto.PatientResponse;
+
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
