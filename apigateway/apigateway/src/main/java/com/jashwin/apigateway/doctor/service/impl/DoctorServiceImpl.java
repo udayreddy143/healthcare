@@ -6,20 +6,24 @@ import com.jashwin.apigateway.doctor.model.DoctorRequest;
 import com.jashwin.apigateway.doctor.model.DoctorResponse;
 import com.jashwin.apigateway.doctor.service.DoctorService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+
+@Service
 //@Slf4j
 @RequiredArgsConstructor
 public class DoctorServiceImpl implements DoctorService {
-
+    @Autowired
     private DoctorFeign doctorFeign;
 
 
     @Override
-    public DoctorResponse storedoctordetails(DoctorRequest request) {
+    public DoctorResponse storeDoctorDetails(DoctorRequest request) {
 
         return doctorFeign.storeDoctorDetails(request);
 
@@ -28,24 +32,24 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public DoctorResponse storeRelatedDisease(String spec, Set<String> dis) {
 
-        return null;
+        return doctorFeign.storeRelatedDisease(spec,dis);
     }
 
     @Override
     public Map<String, List<String>> getRelatedDisease() {
 
-        return null;
+        return doctorFeign.fetchRelatedDisease();
     }
 
     @Override
-    public List<DoctorResponse> getDoctordetails() {
-        return null;
+    public List<DoctorResponse> getDoctorDetails() {
+        return doctorFeign.getDoctorDetails();
 
     }
 
     @Override
-    public DoctorResponse getDoctordetailsById(Integer doctorId) {
+    public DoctorResponse getDoctorDetailsById(Integer doctorId) {
 
-        return null;
+        return doctorFeign.getDoctorDetailsById();
     }
 }
