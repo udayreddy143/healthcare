@@ -2,7 +2,10 @@ package com.SlotBooking.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
+import com.SlotBooking.async.AsyncCompetable;
 import com.SlotBooking.feign.AppointmentAvailabilityFeign;
 import com.SlotBooking.feign.DoctorFeign;
 import com.SlotBooking.feign.PatientFeign;
@@ -28,6 +31,9 @@ public class Slotservice {
 
 	@Autowired
 	private PatientFeign patientFeign;
+
+	@Autowired
+	private AsyncCompetable asyncCompetable;
 
 	@Autowired
 	private DoctorFeign doctorFeign;
@@ -111,9 +117,17 @@ public class Slotservice {
 
 
 			DoctorPatientResponse doctorPatientResponse = new DoctorPatientResponse();
-			DoctorResponse doctorResponse =doctorFeign.getDoctordetailsByDoctorId(slotentity.getDoctorId());
-			PatientResponse patientResponse = patientFeign.getPatientDetailsById(slotentity.getPatientId());
-			AppointmentDTO appointmentDTO = appointmentAvailabilityFeign.getDetailsBySlotId(slotentity.getSlotId());
+			CompletableFuture<DoctorResponse> doctorResponse1 = asyncCompetable.doctorResponsesynccall(slotentity.getDoctorId());
+//			DoctorResponse doctorResponse =doctorFeign.getDoctordetailsByDoctorId(slotentity.getDoctorId());
+			CompletableFuture<PatientResponse> patientResponse1 = asyncCompetable.patientResponsesynccall(slotentity.getDoctorId());
+//			PatientResponse patientResponse = patientFeign.getPatientDetailsById(slotentity.getDoctorId());
+			CompletableFuture<AppointmentDTO> appointmentDTO1 = asyncCompetable.getDetailsBySlotId(slotentity.getSlotId());
+//			AppointmentDTO appointmentDTO = appointmentAvailabilityFeign.getDetailsBySlotId(slotentity.getSlotId());
+			CompletableFuture.allOf(doctorResponse1,patientResponse1,appointmentDTO1).join();
+
+            DoctorResponse doctorResponse = doctorResponse1.join();
+			PatientResponse patientResponse = patientResponse1.join();
+			AppointmentDTO appointmentDTO = appointmentDTO1.join();
 
 			doctorPatientResponse.setDoctorName(doctorResponse.getName());
 			doctorPatientResponse.setSpecialization(doctorResponse.getSpecialization());
