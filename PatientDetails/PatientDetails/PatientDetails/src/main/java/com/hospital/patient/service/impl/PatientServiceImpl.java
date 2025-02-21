@@ -26,6 +26,7 @@ public class PatientServiceImpl implements PatientService {
         patientEntity.setDisease(patientRequest.getDisease());
         patientEntity.setDoctorId(patientRequest.getDoctorId());
         patientRepository.save(patientEntity);
+        System.out.println("patient details saved ");
 
     }
 
