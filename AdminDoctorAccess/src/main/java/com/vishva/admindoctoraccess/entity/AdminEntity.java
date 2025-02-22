@@ -20,7 +20,7 @@ public class AdminEntity {
     private String name;
 
     @NotBlank(message = "Email cannot be blank")
-    @Email(message = "Invalid email format")
+    @Email(message = "Invalid email format please change it")
     @Pattern(regexp = ".+@gmail\\.com$", message = "Email must end with @gmail.com")
     private String email;
 
