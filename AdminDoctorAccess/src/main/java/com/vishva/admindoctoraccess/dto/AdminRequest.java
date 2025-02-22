@@ -3,9 +3,12 @@ package com.vishva.admindoctoraccess.dto;
 import com.vishva.admindoctoraccess.enums.Type;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.processing.Pattern;
+import org.springframework.validation.annotation.Validated;
 
 @Data
 @RequiredArgsConstructor
+@Validated
 public class AdminRequest {
 
     private String name;
