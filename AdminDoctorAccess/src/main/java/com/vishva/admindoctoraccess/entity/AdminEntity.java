@@ -2,25 +2,42 @@ package com.vishva.admindoctoraccess.entity;
 
 import com.vishva.admindoctoraccess.enums.Type;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 @Data
 @RequiredArgsConstructor
 @Entity
-@Table(name="admin_access")
+@Table(name = "admin_access")
 public class AdminEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "Name cannot be blank")
+    @Pattern(regexp = "^[a-zA-Z]+$", message="Name should only contain characters")
     private String name;
+
+    @NotBlank(message = "Email cannot be blank")
+    @Email(message = "Invalid email format please change it")
+    @Pattern(regexp = ".+@gmail\\.com$", message = "Email must end with @gmail.com")
     private String email;
-    private Long phoneNumber;
+
+    @Digits(integer = 10, fraction = 0, message = "Phone number must be exactly 10 digits")
+    @Min(value = 1000000000L, message = "Phone number must be exactly 10 digits")
+    @Max(value = 9999999999L, message = "Phone number must be exactly 10 digits")
+    private long phoneNumber;
+
+    @NotBlank(message = "Password cannot be blank")
+    @Size(min = 8, max = 12, message = "Password must be between 8 and 12 characters")
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,12}$",
+            message = "Password must contain at least one digit, one lowercase letter, one uppercase letter, and one special character")
     private String password;
 
     @Enumerated(EnumType.STRING)
     private Type type;
+
 
     public Long getId() {
         return id;

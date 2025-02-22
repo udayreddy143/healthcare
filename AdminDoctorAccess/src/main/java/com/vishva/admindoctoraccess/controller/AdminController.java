@@ -3,6 +3,7 @@ package com.vishva.admindoctoraccess.controller;
 import com.vishva.admindoctoraccess.dto.AdminRequest;
 import com.vishva.admindoctoraccess.dto.AdminResponse;
 import com.vishva.admindoctoraccess.service.AdminService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ public class AdminController {
     private AdminService adminService;
 
     @PostMapping("/save")
-    public ResponseEntity<Object> registerAdmin(@RequestBody AdminRequest adminRequest){
+    public ResponseEntity<Object> registerAdmin(@Valid @RequestBody AdminRequest adminRequest){
         AdminResponse adminResponse=adminService.registerAdmin(adminRequest);
         System.out.println("admin registered");
         return ResponseEntity.ok(adminResponse);
