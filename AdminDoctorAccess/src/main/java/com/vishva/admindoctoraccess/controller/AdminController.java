@@ -19,7 +19,7 @@ public class AdminController {
     public ResponseEntity<Object> registerAdmin(@RequestBody AdminRequest adminRequest){
         AdminResponse adminResponse=adminService.registerAdmin(adminRequest);
         System.out.println("admin registered");
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.ok(adminResponse);
 
     }
 

@@ -4,6 +4,7 @@ import com.vishva.admindoctoraccess.dao.AdminRepository;
 import com.vishva.admindoctoraccess.dto.AdminRequest;
 import com.vishva.admindoctoraccess.dto.AdminResponse;
 import com.vishva.admindoctoraccess.entity.AdminEntity;
+import com.vishva.admindoctoraccess.jwtUtil.JWTToken;
 import com.vishva.admindoctoraccess.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,9 @@ import java.util.Optional;
 public class AdminServiceImpl implements AdminService {
     @Autowired
     private AdminRepository adminRepository;
+
+    @Autowired
+    private JWTToken jwtToken;
     @Override
     public AdminResponse registerAdmin(AdminRequest adminRequest) {
         AdminEntity adminEntity = new AdminEntity();
@@ -30,6 +34,9 @@ public class AdminServiceImpl implements AdminService {
         adminResponse.setPassword(adminEntity.getPassword());
         adminResponse.setPhoneNumber(adminEntity.getPhoneNumber());
         adminResponse.setType(adminEntity.getType());
+
+        String token = jwtToken.generateToken(adminEntity.getEmail(),adminEntity.getId());
+        adminResponse.setToken(token);
         return adminResponse;
 
     }
