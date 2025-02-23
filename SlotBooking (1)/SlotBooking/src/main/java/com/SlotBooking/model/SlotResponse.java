@@ -1,30 +1,26 @@
 package com.SlotBooking.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class SlotResponse {
-	private Long patientId;
-	private Long DoctorId;
+	@Setter
+    private Long patientId;
+	private int doctorId;
 
-	private Long id;
+	@Setter
+    @Getter
+    private Long id;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getPatientId() {
+    public Long getPatientId() {
 		return patientId;
 	}
-	public void setPatientId(Long patientId) {
-		this.patientId = patientId;
+
+    public int getDoctorId() {
+		return doctorId;
 	}
-	public Long getDoctorId() {
-		return DoctorId;
-	}
-	public void setDoctorId(Long doctorId) {
-		DoctorId = doctorId;
+	public void setDoctorId(int doctorId) {
+		this.doctorId = doctorId;
 	}
 
 

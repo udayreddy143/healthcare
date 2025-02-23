@@ -1,10 +1,14 @@
 package com.SlotBooking.controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.SlotBooking.model.DoctorPatientResponse;
+import com.SlotBooking.model.DoctorSlotPatientResponse;
 import com.SlotBooking.model.SlotResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,8 +36,8 @@ private Slotservice slotservice;
 		
 	}
 	@GetMapping("/dataget/{slotId}")
-	public List<Slotresponse> getdata(@PathVariable Long slotId) {
-	return slotservice.getdata(slotId);
+	public List<Slotresponse> getdata(@PathVariable int slotId) {
+	return slotservice.getdata((long) slotId);
 	}
 //	@PutMapping("/upput")
 //	public Slotrequest updata(@RequestBody Slotrequest slotrequest){
@@ -42,8 +46,8 @@ private Slotservice slotservice;
 //	}
 
 	@DeleteMapping("/datadelete/{id}")
-	public String deletedata(@PathVariable Long id) {
-	return slotservice.deletedata(id);
+	public String deletedata(@PathVariable int id) {
+	return slotservice.deletedata((long) id);
 //	 return "deleted ";
 	}
 
@@ -53,5 +57,18 @@ private Slotservice slotservice;
 		return slotservice.getDoctorPatientDetails();
 	}
 
+
+
+
+	@GetMapping("/doctor/details/{doctorId}")
+	public ResponseEntity<List<DoctorSlotPatientResponse>> getAllDetailsByDoctor(@PathVariable int doctorId) {
+		List<DoctorSlotPatientResponse> details = slotservice.getAllDetailsByDoctor(doctorId);
+
+		if (details.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.emptyList());
+		}
+
+		return ResponseEntity.ok(details);
+	}
 
 }

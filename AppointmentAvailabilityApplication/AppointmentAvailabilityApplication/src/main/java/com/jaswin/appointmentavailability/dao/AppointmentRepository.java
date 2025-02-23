@@ -9,9 +9,11 @@ import java.util.Optional;
 
 @Repository
 public interface AppointmentRepository extends JpaRepository<AppointmentAvailability, Integer> {
-    //Optional<List<AppointmentAvailability>> findByDoctorid(int doctorId);
+    Optional<AppointmentAvailability> findByDoctorId(int doctorId);
 
-    Optional<List<AppointmentAvailability>> findByDoctoridAndStatus(int doctorId,String status);
 
-    Optional<AppointmentAvailability> findBySlotid(int slotId);
+    Optional<List<AppointmentAvailability>> findByDoctorIdAndStatus(int doctorId, String status);
+
+    Optional<AppointmentAvailability> findBySlotId(int slotId);
+
 }

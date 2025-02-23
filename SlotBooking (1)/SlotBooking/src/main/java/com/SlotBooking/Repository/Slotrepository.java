@@ -10,8 +10,9 @@ import com.SlotBooking.Entity.Slotentity;
 @Repository
 
 public interface Slotrepository extends JpaRepository<Slotentity, Long>{
-	List<Slotentity>  findBySlotId(Long SlotId);
+	List<Slotentity>  findBySlotId(int SlotId);
 
-	Optional<Slotentity>  findBySlotIdAndDoctorIdAndPatientId(Long SlotId, Long doctorId, Long patientId);
-	
+	//Optional<Slotentity>  findBySlotIdAndDoctorIdAndPatientId(Long SlotId);
+
+	List<Slotentity> findByDoctorId(int doctorId);
 }

@@ -8,8 +8,6 @@ import com.jaswin.appointmentavailability.model.AppointmentRequest;
 import com.jaswin.appointmentavailability.service.AppointmentService;
 import lombok.RequiredArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -24,35 +22,35 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public void storeAppointments(AppointmentRequest appointmentRequest) {
         AppointmentAvailability appointmentAvailability = new AppointmentAvailability();
-        appointmentAvailability.setDoctorid(appointmentRequest.getDoctorid());
-        appointmentAvailability.setStarttime(appointmentRequest.getStartTime());
-        appointmentAvailability.setEndtime(appointmentRequest.getEndTime());
+        appointmentAvailability.setDoctorId(appointmentRequest.getDoctorId());
+        appointmentAvailability.setStartTime(appointmentRequest.getStartTime());
+        appointmentAvailability.setEndTime(appointmentRequest.getEndTime());
         appointmentAvailability.setStatus(appointmentRequest.getStatus().getValue());
         appointmentRepository.save(appointmentAvailability);
 
     }
 
-    @Override
-    public List<AppointmentDTO> getAppointmentsBySlotId(int doctorId) {
-        Optional<List<AppointmentAvailability>> response = appointmentRepository.findByDoctoridAndStatus(doctorId,AppointmentStatus.AVAILABLE.getValue());
 
-        List<AppointmentDTO> appointmentDTOList = new ArrayList<>();
-        //Optional<AppointmentAvailability> appointmentAvailability=appointmentRepository.findById(slotId);
+
+    public AppointmentDTO getAppointmentsByDoctorId(int doctorId) {
+
+        Optional<AppointmentAvailability> response = appointmentRepository.findByDoctorId(doctorId);
+
         if (response.isPresent()) {
-            List<AppointmentAvailability> appointmentAvailabilityList = response.get();
-            for(AppointmentAvailability appointmentAvailability:appointmentAvailabilityList) {
-                AppointmentDTO appointmentDTO = new AppointmentDTO();
-                appointmentDTO.setSlotid(appointmentAvailability.getSlotid());
-                appointmentDTO.setDoctorid(appointmentAvailability.getDoctorid());
-                appointmentDTO.setStartiime(appointmentAvailability.getStarttime());
-                appointmentDTO.setEndtime(appointmentAvailability.getEndtime());
-                appointmentDTO.setStatus(appointmentAvailability.getStatus());
-                appointmentDTOList.add(appointmentDTO);
-            }
-            return appointmentDTOList;
+            AppointmentAvailability appointmentAvailability = response.get();
+            AppointmentDTO appointmentDTO = new AppointmentDTO();
+            appointmentDTO.setSlotId(appointmentAvailability.getSlotId());
+            appointmentDTO.setDoctorId(appointmentAvailability.getDoctorId());
+            appointmentDTO.setStartTime(appointmentAvailability.getStartTime());
+            appointmentDTO.setEndTime(appointmentAvailability.getEndTime());
+            appointmentDTO.setStatus(appointmentAvailability.getStatus());
+            return appointmentDTO;
+
+
         }
         return null;
     }
+
 
 
 
@@ -63,10 +61,10 @@ public class AppointmentServiceImpl implements AppointmentService {
         if (response.isPresent()) {
             AppointmentAvailability appointmentAvailability = response.get();
                 AppointmentDTO appointmentDTO = new AppointmentDTO();
-                appointmentDTO.setSlotid(appointmentAvailability.getSlotid());
-                appointmentDTO.setDoctorid(appointmentAvailability.getDoctorid());
-                appointmentDTO.setStartiime(appointmentAvailability.getStarttime());
-                appointmentDTO.setEndtime(appointmentAvailability.getEndtime());
+                appointmentDTO.setSlotId(appointmentAvailability.getSlotId());
+                appointmentDTO.setDoctorId(appointmentAvailability.getDoctorId());
+                appointmentDTO.setStartTime(appointmentAvailability.getStartTime());
+                appointmentDTO.setEndTime(appointmentAvailability.getEndTime());
                 appointmentDTO.setStatus(appointmentAvailability.getStatus());
                 return appointmentDTO;
 
@@ -84,7 +82,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public void updateAppointment(Integer id, AppointmentStatus appointmentStatus) {
-        Optional<AppointmentAvailability> response = appointmentRepository.findBySlotid(id);
+        Optional<AppointmentAvailability> response = appointmentRepository.findBySlotId(id);
         if(response.isPresent()) {
             AppointmentAvailability appointmentAvailability = response.get();
             appointmentAvailability.setStatus(appointmentStatus.getValue());

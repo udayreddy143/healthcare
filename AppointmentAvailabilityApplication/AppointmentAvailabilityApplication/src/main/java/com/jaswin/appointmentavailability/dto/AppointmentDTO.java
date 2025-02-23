@@ -3,42 +3,42 @@ package com.jaswin.appointmentavailability.dto;
 import java.time.LocalDateTime;
 
 public class AppointmentDTO {
-    private int slotid;
-    private int doctorid;
-    private LocalDateTime startiime;
-    private LocalDateTime endtime;
+    private int slotId;
+    private int doctorId;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
     private String status;
 
-    public int getSlotid() {
-        return slotid;
+    public int getSlotId() {
+        return slotId;
     }
 
-    public void setSlotid(int slotid) {
-        this.slotid = slotid;
+    public void setSlotId(int slotId) {
+        this.slotId = slotId;
     }
 
-    public int getDoctorid() {
-        return doctorid;
+    public int getDoctorId() {
+        return doctorId;
     }
 
-    public void setDoctorid(int doctorid) {
-        this.doctorid = doctorid;
+    public void setDoctorId(int doctorId) {
+        this.doctorId = doctorId;
     }
 
-    public LocalDateTime getStartiime() {
-        return startiime;
+    public LocalDateTime getStartTime() {
+        return startTime;
     }
 
-    public void setStartiime(LocalDateTime startiime) {
-        this.startiime = startiime;
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
     }
 
-    public LocalDateTime getEndtime() {
-        return endtime;
+    public LocalDateTime getEndTime() {
+        return endTime;
     }
 
-    public void setEndtime(LocalDateTime endtime) {
-        this.endtime = endtime;
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
     }
 
     public String getStatus() {

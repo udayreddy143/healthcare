@@ -106,7 +106,7 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public DoctorResponse getDoctordetailsById(Integer doctorId){
+    public DoctorResponse getDoctordetailsByDoctorId(int doctorId){
 
         Optional<DoctorEntity> doctorResponse = doctorRepository.findById(doctorId);
 

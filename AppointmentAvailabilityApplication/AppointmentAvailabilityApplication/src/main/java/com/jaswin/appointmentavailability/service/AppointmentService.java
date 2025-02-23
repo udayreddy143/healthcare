@@ -4,15 +4,13 @@ import com.jaswin.appointmentavailability.dto.AppointmentDTO;
 import com.jaswin.appointmentavailability.enums.AppointmentStatus;
 import com.jaswin.appointmentavailability.model.AppointmentRequest;
 
-import java.util.List;
-
 
 public interface AppointmentService {
     void testService();
 
     void storeAppointments(AppointmentRequest appointmentRequest);
 
-    List<AppointmentDTO> getAppointmentsBySlotId(int id);
+    AppointmentDTO getAppointmentsByDoctorId(int doctorId);
 
     AppointmentDTO getDetailsBySlotId(int slotId);
 

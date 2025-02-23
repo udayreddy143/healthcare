@@ -1,5 +1,7 @@
 package com.example.Doctor.controller;
 
+import com.example.Doctor.enums.Specialization;
+
 import com.example.Doctor.model.DoctorRequest;
 import com.example.Doctor.model.DoctorResponse;
 import com.example.Doctor.service.DoctorService;
@@ -35,11 +37,11 @@ public class DoctorController {
 
     }
 
-    @PostMapping("/storeRelatedDisease/{specilization}")
-    public DoctorResponse storeRelatedDisease(@PathVariable("specilization") String specilization, @RequestParam("diseases")Set<String> diseases) {
-
-        return doctorService.storeRelatedDisease(specilization,diseases);
-
+    @PostMapping("/storeRelatedDisease/{specialization}")
+    public DoctorResponse storeRelatedDisease(
+            @PathVariable("specialization") String specialization,
+            @RequestBody Set<String> diseases) {  // Accept JSON body
+        return doctorService.storeRelatedDisease(specialization, diseases);
     }
 
     @GetMapping("/fetchRelatedDisease")
@@ -57,9 +59,9 @@ public class DoctorController {
     }
 
     @GetMapping("/getDoctordetailsById/{doctorId}")
-    public DoctorResponse getDoctordetailsById(@PathVariable Integer doctorId) {
+    public DoctorResponse getDoctordetailsByDoctorId(@PathVariable int doctorId) {
 
-        return doctorService.getDoctordetailsById(doctorId);
+        return doctorService.getDoctordetailsByDoctorId(doctorId);
 
     }
 }

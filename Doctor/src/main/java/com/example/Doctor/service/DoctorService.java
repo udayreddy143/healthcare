@@ -17,5 +17,5 @@ public interface DoctorService {
 
     List<DoctorResponse> getDoctordetails();
 
-    DoctorResponse getDoctordetailsById(Integer doctorId);
+    DoctorResponse getDoctordetailsByDoctorId(int doctorId);
 }

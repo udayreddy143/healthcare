@@ -3,12 +3,10 @@ package com.jaswin.appointmentavailability.controller;
 import com.jaswin.appointmentavailability.dto.AppointmentDTO;
 import com.jaswin.appointmentavailability.enums.AppointmentStatus;
 import com.jaswin.appointmentavailability.model.AppointmentRequest;
-import com.jaswin.appointmentavailability.model.UpdateAppointmentRequest;
 import com.jaswin.appointmentavailability.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -23,19 +21,22 @@ public class AppointmentController {
         appointmentService.storeAppointments(appointmentRequest);
     }
 
-    @GetMapping("/getAppointments/{doctorId}")
-    public List<AppointmentDTO> getppointmentsBySlotId(@PathVariable Integer doctorId) {
-       return appointmentService.getAppointmentsBySlotId(doctorId);
+    @GetMapping("/getAppointmentsByDoctorId/{doctorId}")
+   public AppointmentDTO getAppointmentsByDoctorId(@PathVariable int doctorId)
+    {
+
+        return appointmentService.getAppointmentsByDoctorId(doctorId);
     }
 
+
     @GetMapping("/getDetailsBySlotId/{slotId}")
-    public AppointmentDTO getDetailsBySlotId(@PathVariable Integer slotId) {
+    public AppointmentDTO getDetailsBySlotId(@PathVariable int slotId) {
         return appointmentService.getDetailsBySlotId(slotId);
     }
 
-    @PutMapping("/update/{slotid}/{status}")
-    public void updateAppointment(@PathVariable int slotid, @PathVariable AppointmentStatus status) {
-        appointmentService.updateAppointment(slotid, status);
+    @PutMapping("/update/{slotId}/{status}")
+    public void updateAppointment(@PathVariable int slotId, @PathVariable AppointmentStatus status) {
+        appointmentService.updateAppointment(slotId, status);
     }
 
     //take list of Ids

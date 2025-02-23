@@ -1,6 +1,6 @@
 package com.jaswin.appointmentavailability.entity;
 
-import com.jaswin.appointmentavailability.enums.AppointmentStatus;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,10 +14,14 @@ import java.time.LocalDateTime;
 public class AppointmentAvailability {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int slotid;
-    private int doctorid;
-    private LocalDateTime starttime;
-    private LocalDateTime endtime;
+    @Column(name= "slotid")
+    private int slotId;
+    @Column(name = "doctorid")
+    private int doctorId;
+    @Column(name = "starttime")
+    private LocalDateTime startTime;
+    @Column(name = "endtime")
+    private LocalDateTime endTime;
     private String status;
 
 }

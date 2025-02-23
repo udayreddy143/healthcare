@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class AppointmentRequest {
-    private int doctorid;
+    private int doctorId;
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private LocalDateTime startTime;
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")

@@ -12,6 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface DoctorFeign {
 
     @RequestMapping(method = RequestMethod.GET, value = "/getDoctordetailsById/{doctorId}")
-    DoctorResponse getDoctordetailsByDoctorId(@PathVariable Long doctorId);
+    DoctorResponse getDoctordetailsByDoctorId(@PathVariable int doctorId);
 
 }

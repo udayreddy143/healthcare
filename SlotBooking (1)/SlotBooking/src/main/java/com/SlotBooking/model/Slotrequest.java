@@ -2,19 +2,19 @@ package com.SlotBooking.model;
 
 public class Slotrequest {
 
-	private Long slotId;
-	private Long doctorId;
+	private int slotId;
+	private int doctorId;
 
-	public Long getSlotId() {
+	public int getSlotId() {
 		return slotId;
 	}
-	public void setSlotId(Long slotId) {
+	public void setSlotId(int slotId) {
 		this.slotId = slotId;
 	}
-	public Long getDoctorId() {
+	public int getDoctorId() {
 		return doctorId;
 	}
-	public void setDoctorId(Long doctorId) {
+	public void setDoctorId(int doctorId) {
 		this.doctorId = doctorId;
 	}
 

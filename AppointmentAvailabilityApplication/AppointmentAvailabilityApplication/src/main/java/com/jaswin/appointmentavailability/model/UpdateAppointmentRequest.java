@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 public class UpdateAppointmentRequest {
-    private int doctorid;
+    private int doctorId;
     private AppointmentStatus status;
 }
