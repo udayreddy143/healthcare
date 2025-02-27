@@ -7,18 +7,6 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="AppointmentAvailabilityApplication" />
-        <module name="Doctor" />
-      </profile>
-      <profile name="Annotation profile for SlotBooking" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
-        </processorPath>
-        <module name="SlotBooking" />
-        <module name="PatientDetails" />
       </profile>
       <profile name="Annotation profile for AdminDoctorAccess" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -27,7 +15,6 @@
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
         </processorPath>
-        <module name="apigateway" />
         <module name="AdminDoctorAccess" />
       </profile>
     </annotationProcessing>
@@ -37,9 +24,9 @@
       <module name="AdminDoctorAccess" options="-parameters" />
       <module name="AppointmentAvailabilityApplication" options="-parameters" />
       <module name="Doctor" options="-parameters" />
-      <module name="PatientDetails" options="" />
+      <module name="PatientDetails" options="-parameters" />
       <module name="SlotBooking" options="" />
-      <module name="apigateway" options="-parameters" />
+      <module name="apigateway" options="" />
     </option>
   </component>
 </project>

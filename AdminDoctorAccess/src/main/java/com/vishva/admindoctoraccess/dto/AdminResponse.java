@@ -3,8 +3,12 @@ package com.vishva.admindoctoraccess.dto;
 import com.vishva.admindoctoraccess.enums.Type;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class AdminResponse {
+public class AdminResponse implements Serializable { //implemented serializable to avoid serialiazable error for get API
+    private static final long serialVersionUID = 1L; // Required for serialization
+
     private Long id;
     private String name;
     private String email;

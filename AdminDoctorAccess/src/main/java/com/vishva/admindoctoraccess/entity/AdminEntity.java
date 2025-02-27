@@ -6,11 +6,13 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @RequiredArgsConstructor
 @Entity
 @Table(name = "admin_access")
-public class AdminEntity {
+public class AdminEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

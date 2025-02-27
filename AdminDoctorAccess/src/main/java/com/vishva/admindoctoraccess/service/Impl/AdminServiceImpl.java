@@ -7,6 +7,9 @@ import com.vishva.admindoctoraccess.entity.AdminEntity;
 import com.vishva.admindoctoraccess.jwtUtil.JWTToken;
 import com.vishva.admindoctoraccess.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -15,7 +18,8 @@ import java.util.Optional;
 public class AdminServiceImpl implements AdminService {
     @Autowired
     private AdminRepository adminRepository;
-
+    @Autowired
+private RedisTemplate<String,Object> redisTemplate;
     @Autowired
     private JWTToken jwtToken;
     @Override
@@ -41,12 +45,8 @@ public class AdminServiceImpl implements AdminService {
 
     }
 
-//    @Override
-//    public void loginAdminByPhoneNumber(Long phoneNumber) {
-//
-//    }
-//
     @Override
+    @Cacheable(value="admin", key="#id") //caching admin profile by id
     public AdminResponse getProfileById(Long id) {
         AdminResponse adminResponse = new AdminResponse();
         Optional<AdminEntity> adminEntity = adminRepository.findById(id);
@@ -63,6 +63,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+//    @Cacheable(value="adminLogin", key="#email") //cache login response using email
     public AdminResponse loginAdminAndDoc(String email, String password) {
         AdminResponse adminResponse = new AdminResponse();
         Optional<AdminEntity> adminEntity = adminRepository.findByEmailAndPassword(email, password);
@@ -76,5 +77,12 @@ public class AdminServiceImpl implements AdminService {
             return adminResponse;
         }
         return null;
+    }
+
+    @Override
+    @CacheEvict(value ="admin", key="#id") // Removes from cache on deletion
+    public String deleteById(Long id){
+        adminRepository.deleteById(id);
+        return "Admin deleted successfully";
     }
 }
