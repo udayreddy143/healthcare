@@ -1,5 +1,6 @@
 package com.example.Doctor.service.impl;
 
+import com.example.Doctor.configuration.RedisDoctorCache;
 import com.example.Doctor.entity.DoctorEntity;
 import com.example.Doctor.entity.SpecDisRelationEntity;
 import com.example.Doctor.model.DoctorRequest;
@@ -8,6 +9,8 @@ import com.example.Doctor.repository.DoctorRepository;
 import com.example.Doctor.repository.SpecDiseaseRepository;
 import com.example.Doctor.service.DoctorService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +28,9 @@ public class DoctorServiceImpl implements DoctorService {
     private  final SpecDiseaseRepository specDiseaseRepository;
 
 
+
+    @Autowired
+    RedisDoctorCache doctorCache;
 
     @Override
     public DoctorResponse storedoctordetails(DoctorRequest request) {
@@ -91,6 +97,8 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public List<DoctorResponse> getDoctordetails() {
 
+        //Bucket
+
         List<DoctorEntity> savedEntity = doctorRepository.findAll();
         List<DoctorResponse> responseList = new ArrayList<>();
         for(DoctorEntity entity:savedEntity) {
@@ -108,15 +116,23 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public DoctorResponse getDoctordetailsById(Integer doctorId){
 
+        if(doctorCache.checkData(doctorId.toString())) {
+            System.out.println("return data from cache");
+            return doctorCache.get(doctorId.toString());
+        }
         Optional<DoctorEntity> doctorResponse = doctorRepository.findById(doctorId);
-
+        //here i ned to redis template to cache the data
         if(doctorResponse.isPresent()) {
+            System.out.println("getting data from reposity");
             DoctorEntity entity = doctorResponse.get();
             DoctorResponse doctorResponse1 = new DoctorResponse();
             doctorResponse1.setName(entity.getName());
             doctorResponse1.setSpecialization(entity.getSpecialization());
             doctorResponse1.setExperience(entity.getExperience());
+            //store data intpo the cache
+            doctorCache.put(doctorId.toString(),doctorResponse1);
             return doctorResponse1;
+
         }
         return null;
     }
